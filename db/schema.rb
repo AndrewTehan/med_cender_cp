@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_071345) do
+ActiveRecord::Schema.define(version: 2022_10_05_153908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,26 @@ ActiveRecord::Schema.define(version: 2022_10_05_071345) do
     t.index ["medical_center_id"], name: "index_departments_on_medical_center_id"
   end
 
+  create_table "doctors", force: :cascade do |t|
+    t.string "full_name"
+    t.string "phone_number"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "inspection_reports", force: :cascade do |t|
+    t.string "medical_report"
+    t.string "medical_appointment"
+    t.string "medical_examination"
+    t.bigint "visit_id"
+    t.bigint "patient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_inspection_reports_on_patient_id"
+    t.index ["visit_id"], name: "index_inspection_reports_on_visit_id"
+  end
+
   create_table "medical_centers", force: :cascade do |t|
     t.string "email", null: false
     t.string "address", null: false
@@ -33,5 +53,31 @@ ActiveRecord::Schema.define(version: 2022_10_05_071345) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "full_name"
+    t.string "phone_number"
+    t.string "email"
+    t.string "passport_number"
+    t.bigint "department_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_patients_on_department_id"
+  end
+
+  create_table "visits", force: :cascade do |t|
+    t.date "datetime"
+    t.bigint "doctor_id"
+    t.bigint "patient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_visits_on_doctor_id"
+    t.index ["patient_id"], name: "index_visits_on_patient_id"
+  end
+
   add_foreign_key "departments", "medical_centers"
+  add_foreign_key "inspection_reports", "patients"
+  add_foreign_key "inspection_reports", "visits"
+  add_foreign_key "patients", "departments"
+  add_foreign_key "visits", "doctors"
+  add_foreign_key "visits", "patients"
 end

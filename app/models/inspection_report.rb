@@ -1,0 +1,2 @@
+class InspectionReport < ApplicationRecord
+end
