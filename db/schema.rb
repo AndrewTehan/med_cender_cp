@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
   enable_extension "plpgsql"
 
   create_table "departments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description", null: false
+    t.string "name", limit: 255, null: false
+    t.string "description", limit: 255, null: false
     t.bigint "medical_center_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,11 +25,13 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
   end
 
   create_table "doctors", force: :cascade do |t|
-    t.string "full_name"
-    t.string "phone_number"
-    t.string "email"
+    t.string "full_name", limit: 255
+    t.string "phone_number", limit: 255
+    t.string "email", limit: 255
+    t.bigint "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_doctors_on_department_id"
   end
 
   create_table "inspection_reports", force: :cascade do |t|
@@ -45,23 +47,21 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
   end
 
   create_table "medical_centers", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "address", null: false
+    t.string "email", limit: 255, null: false
+    t.string "address", limit: 255, null: false
     t.string "schedule", null: false
-    t.string "legal_entity", null: false
+    t.string "legal_entity", limit: 255, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "patients", force: :cascade do |t|
-    t.string "full_name"
-    t.string "phone_number"
-    t.string "email"
-    t.string "passport_number"
-    t.bigint "department_id"
+    t.string "full_name", limit: 255
+    t.string "phone_number", limit: 255
+    t.string "email", limit: 255
+    t.string "passport_number", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["department_id"], name: "index_patients_on_department_id"
   end
 
   create_table "visits", force: :cascade do |t|
@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
   end
 
   add_foreign_key "departments", "medical_centers"
+  add_foreign_key "doctors", "departments"
   add_foreign_key "inspection_reports", "patients"
   add_foreign_key "inspection_reports", "visits"
-  add_foreign_key "patients", "departments"
   add_foreign_key "visits", "doctors"
   add_foreign_key "visits", "patients"
 end
