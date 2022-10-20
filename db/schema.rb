@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
   create_table "inspection_reports", force: :cascade do |t|
     t.string "medical_report"
     t.string "medical_appointment"
-    t.string "medical_examination"
     t.bigint "visit_id"
     t.bigint "patient_id"
     t.datetime "created_at", precision: 6, null: false
@@ -65,7 +64,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.date "datetime"
+    t.datetime "datetime"
     t.bigint "doctor_id"
     t.bigint "patient_id"
     t.datetime "created_at", precision: 6, null: false

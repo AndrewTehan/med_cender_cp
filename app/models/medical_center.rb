@@ -1,3 +1,5 @@
 class MedicalCenter < ApplicationRecord
   has_many :deparments
-end
+
+  validates :email, :address, :schedule, :legal_entity, presence: true
+ end
