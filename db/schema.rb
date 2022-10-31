@@ -38,10 +38,8 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
     t.string "medical_report"
     t.string "medical_appointment"
     t.bigint "visit_id"
-    t.bigint "patient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["patient_id"], name: "index_inspection_reports_on_patient_id"
     t.index ["visit_id"], name: "index_inspection_reports_on_visit_id"
   end
 
@@ -75,7 +73,6 @@ ActiveRecord::Schema.define(version: 2022_10_05_153908) do
 
   add_foreign_key "departments", "medical_centers"
   add_foreign_key "doctors", "departments"
-  add_foreign_key "inspection_reports", "patients"
   add_foreign_key "inspection_reports", "visits"
   add_foreign_key "visits", "doctors"
   add_foreign_key "visits", "patients"

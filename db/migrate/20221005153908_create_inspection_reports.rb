@@ -4,7 +4,6 @@ class CreateInspectionReports < ActiveRecord::Migration[6.0]
       t.string :medical_report
       t.string :medical_appointment
       t.belongs_to :visit, index: true, foreign_key: true
-      t.belongs_to :patient, index: true, foreign_key: true
 
       t.timestamps
     end
