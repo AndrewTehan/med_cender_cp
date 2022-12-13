@@ -1,0 +1,20 @@
+<h1>Edit Department</h1>
+
+<%= form_with model: [@medical_center, @department], local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, value: @department.name %>
+  </p>
+
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, value: @department.description  %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Department #{@department.name}", medical_center_department_path(@medical_center, @department) %>

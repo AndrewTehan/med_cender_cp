@@ -1,0 +1,13 @@
+<h1>Medical Centers</h1>
+
+<ul>
+  <% @medical_centers.each do |medical_center| %>
+    <li>
+      <%= link_to medical_center.legal_entity, medical_center %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<%= link_to "New Medical Center", new_medical_center_path %>

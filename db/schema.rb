@@ -67,12 +67,14 @@ ActiveRecord::Schema.define(version: 2022_12_05_085047) do
     t.string "phone_number", limit: 255
     t.string "email", limit: 255
     t.string "passport_number", limit: 255
+    t.bigint "medical_center_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["medical_center_id"], name: "index_patients_on_medical_center_id"
   end
 
   create_table "visits", force: :cascade do |t|
-    t.datetime "datetime"
+    t.string "datetime"
     t.bigint "doctor_id"
     t.bigint "patient_id"
     t.datetime "created_at", precision: 6, null: false
@@ -85,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_12_05_085047) do
   add_foreign_key "departments", "medical_centers"
   add_foreign_key "doctors", "departments"
   add_foreign_key "inspection_reports", "visits"
+  add_foreign_key "patients", "medical_centers"
   add_foreign_key "visits", "doctors"
   add_foreign_key "visits", "patients"
 end

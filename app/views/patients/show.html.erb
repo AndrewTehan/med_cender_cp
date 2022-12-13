@@ -1,0 +1,16 @@
+<h1><%= @patient.full_name%></h1>
+
+<p><%= @patient.email %></p>
+<p><%= @patient.phone_number %></p>
+<p><%= @patient.passport_number %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_medical_center_patient_path(@medical_center, @patient) %></li>
+  <li><%= link_to "Destroy", medical_center_patient_path(@medical_center, @patient),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<hr>
+
+<%= link_to "Patient Index", medical_center_patients_path(@medical_center) %>

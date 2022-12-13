@@ -1,0 +1,37 @@
+<%= form_with model: medical_center, local: false do |form| %>
+  <div>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %>
+    <%= medical_center.errors.full_messages_for(:email).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :address %><br>
+    <%= form.text_area :address %><br>
+    <%= medical_center.errors.full_messages_for(:address).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :schedule %><br>
+    <%= form.text_area :schedule %><br>
+    <%= medical_center.errors.full_messages_for(:schedule).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :legal_entity %><br>
+    <%= form.text_area :legal_entity %><br>
+    <%= medical_center.errors.full_messages_for(:legal_entity).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

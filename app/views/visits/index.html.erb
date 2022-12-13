@@ -1,0 +1,13 @@
+<h1>Visits</h1>
+
+<ul>
+  <% @visits.each do |visit| %>
+    <li>
+      <%= link_to "#{visit.datetime} - #{visit.patient.full_name}", medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, visit) %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<%= link_to "Doctor #{@doctor.full_name}", medical_center_department_doctor_path(@medical_center, @department, @doctor) %>

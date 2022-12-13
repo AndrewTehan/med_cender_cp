@@ -1,0 +1,30 @@
+<h1>New Patient</h1>
+<%= form_with model: [@medical_center, @medical_center.patients.build ], local: true do |form| %>
+  <p>
+    <%= form.label :full_name %><br>
+    <%= form.text_field :full_name %>
+  </p>
+
+  <p>
+    <%= form.label :phone_number %><br>
+    <%= form.text_field :phone_number %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :passport_number %><br>
+    <%= form.text_field :passport_number %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Patient Index", medical_center_patients_path(@medical_center) %>

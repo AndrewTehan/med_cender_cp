@@ -1,0 +1,19 @@
+<h1>New Deparment</h1>
+<%= form_with model: [ @medical_center, @medical_center.departments.build ], local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Medical Center #{@medical_center.legal_entity}", medical_center_path(@medical_center) %>

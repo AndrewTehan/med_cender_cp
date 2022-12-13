@@ -1,0 +1,26 @@
+<h1><%= @department.name %></h1>
+
+<p><%= @department.description %></p>
+
+<hr>
+
+<ul>
+  <li><%= link_to "Edit", edit_medical_center_department_path(@department.medical_center, @department) %></li>
+  <li><%= link_to "Destroy", medical_center_department_path(@department.medical_center, @department),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<hr>
+
+<h2>Add a Doctor:</h2>
+<li><%= link_to "Create Doctor", new_medical_center_department_doctor_path(@medical_center, @department) %></li>
+
+<hr>
+
+<h2>All Doctors:</h2>
+<li><%= link_to "All Doctors", medical_center_department_doctors_path(@medical_center, @department) %></li>
+
+<hr>
+
+<%= link_to "Medical Center #{@medical_center.legal_entity}", medical_center_path(@medical_center) %>

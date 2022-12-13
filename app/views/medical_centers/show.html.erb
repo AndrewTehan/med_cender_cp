@@ -1,0 +1,39 @@
+<h1><%= @medical_center.legal_entity %></h1>
+
+<p><%= @medical_center.email %></p>
+<p><%= @medical_center.address %></p>
+<p><%= @medical_center.schedule %></p>
+
+<hr>
+
+<ul>
+  <li><%= link_to "Edit", edit_medical_center_path(@medical_center) %></li>
+  <li><%= link_to "Destroy", medical_center_path(@medical_center),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<hr>
+
+<h2>Departments</h2>
+
+<ul>
+  <% @medical_center.departments.each do |department| %>
+    <li>
+      <%= link_to department.name, medical_center_department_path(@medical_center, department) %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<h2>Add a department:</h2>
+<li><%= link_to "Create Department", new_medical_center_department_path(@medical_center) %></li>
+
+<hr>
+
+<%= link_to "Patient Index", medical_center_patients_path(@medical_center) %>
+
+<hr>
+
+<%= link_to "Medical Center Index", medical_centers_path(@medical_center) %>

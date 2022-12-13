@@ -1,0 +1,25 @@
+<h1>New Doctor</h1>
+<%= form_with model: [@medical_center, @department, @department.doctors.build ], local: true do |form| %>
+  <p>
+    <%= form.label :full_name %><br>
+    <%= form.text_field :full_name %>
+  </p>
+
+  <p>
+    <%= form.label :phone_number %><br>
+    <%= form.text_field :phone_number %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Departament #{@department.name}", medical_center_department_path(@medical_center, @department) %>

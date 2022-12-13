@@ -1,0 +1,30 @@
+<h1>Edit Patient</h1>
+
+<%= form_with model: [@medical_center, @patient], local: true do |form| %>
+  <p>
+    <%= form.label :full_name %><br>
+    <%= form.text_field :full_name, value: @patient.full_name %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= form.text_area :email, value: @patient.email  %>
+  </p>
+
+  <p>
+    <%= form.label :phone_number %><br>
+    <%= form.text_area :phone_number, value: @patient.phone_number  %>
+  </p>
+
+  <p>
+    <%= form.label :passport_number %><br>
+    <%= form.text_area :passport_number, value: @patient.passport_number  %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Show #{@patient.full_name}", medical_center_patient_path(@medical_center, @patient) %>
