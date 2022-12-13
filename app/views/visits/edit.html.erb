@@ -1,0 +1,15 @@
+<h1>Edit Visit</h1>
+
+<%= form_with model: [@medical_center, @department, @doctor, @visit], local: true do |form| %>
+  <p>
+    <%= form.label :datetime %><br>
+    <%= form.text_field :datetime, value: @visit.datetime %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Visit", medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit) %>
