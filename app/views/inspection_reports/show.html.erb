@@ -1,0 +1,14 @@
+<h1><%= @inspection_report.medical_report %></h1>
+
+<p><%= @inspection_report.medical_appointment %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit) %></li>
+  <li><%= link_to "Destroy", medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<hr>
+
+<%= link_to "Visit Index", medical_center_department_doctor_visits_path(@medical_center, @department, @doctor) %>

@@ -1,0 +1,25 @@
+<h1>New Inspection Report</h1>
+<%= form_with model: [@medical_center, @department, @doctor, @visit, @visit.inspection_reports.build], local: true do |form| %>
+  <p>
+    <%= form.label :medical_report %><br>
+    <%= form.text_field :medical_report %>
+  </p>
+
+  <p>
+    <%= form.label :medical_appointment %><br>
+    <%= form.text_field :medical_appointment %>
+  </p>
+
+  <p>
+    <%= form.label :visit_id %><br>
+    <%= form.text_field :visit_id, value: @visit.id, readonly: true %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<hr>
+
+<%= link_to "Inspection Report Index", medical_center_department_doctor_visit_inspection_reports_path(@medical_center, @department, @doctor, @visit) %>

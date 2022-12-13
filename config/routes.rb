@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :medical_centers do
     resources :departments do
       resources :doctors do
-        resources :visits
+        resources :visits do
+          resources :inspection_reports
+        end
       end
     end
     resources :patients

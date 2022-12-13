@@ -11,7 +11,7 @@ class DoctorsController < ApplicationController
 
   def create
     @doctor = @department.doctors.create(doctor_params)
-    redirect_to medical_center_department_path(@medical_center, @department)
+    redirect_to medical_center_department_doctor_path(@medical_center, @department, @doctor)
   end
 
   def show; end

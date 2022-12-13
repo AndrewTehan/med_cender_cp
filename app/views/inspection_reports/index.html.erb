@@ -1,0 +1,13 @@
+<h1>Inspection Reports</h1>
+
+<ul>
+  <% @inspection_reports.each do |inspection_report| %>
+    <li>
+      <%= link_to "inspection_report - #{@visit.patient.full_name}", medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit, inspection_report) %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<%= link_to "Visit", medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit) %>

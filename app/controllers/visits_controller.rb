@@ -12,7 +12,7 @@ class VisitsController < ApplicationController
 
   def create
     @visit = @doctor.visits.create(visit_params)
-    redirect_to medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit)
+    redirect_to medical_center_department_doctor_visits_path(@medical_center, @department, @doctor)
   end
 
   def show; end

@@ -11,4 +11,12 @@
 
 <hr>
 
+<%= link_to "Create Inspection Report", new_medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit) %>
+
+<hr>
+
+<%= link_to "Inspection Report Index", medical_center_department_doctor_visit_inspection_reports_path(@medical_center, @department, @doctor, @visit) %>
+
+<hr>
+
 <%= link_to "Visit Index #{@doctor.full_name}", medical_center_department_doctor_visits_path(@medical_center, @department, @doctor) %>
