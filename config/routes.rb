@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :doctors
   root "medical_centers#index"
 
   resources :medical_centers do
