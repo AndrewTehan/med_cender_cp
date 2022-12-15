@@ -15,6 +15,12 @@
     <%= form.label :phone_number %><br>
     <%= form.text_area :phone_number, value: @doctor.phone_number  %>
   </p>
+
+  <p>
+    <%= form.label :password %><br>
+    <%= form.text_field :password %>
+  </p>
+
   <p>
     <%= form.submit %>
   </p>

@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    <% if current_user.class.to_s == 'Admin' %>
+      <li><%= link_to "sign_out", destroy_admin_session_path, method: :delete %></li>
+    <% elsif current_user.class.to_s == 'Doctor' %>
+      <li><%= link_to "sign_out", destroy_doctor_session_path, method: :delete %></li>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

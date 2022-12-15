@@ -16,6 +16,11 @@
   </p>
 
   <p>
+    <%= form.label :password %><br>
+    <%= form.text_field :password, value: '123321', readonly: true %>
+  </p>
+
+  <p>
     <%= form.submit %>
   </p>
 <% end %>
