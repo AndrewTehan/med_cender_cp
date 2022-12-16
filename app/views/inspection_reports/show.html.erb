@@ -4,9 +4,11 @@
 
 <ul>
   <li><%= link_to "Edit", edit_medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit) %></li>
-  <li><%= link_to "Destroy", medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
+  <% if current_user.class.to_s == 'Admin' %>
+    <li><%= link_to "Destroy", medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></li>
+  <% end %>
 </ul>
 
 <hr>

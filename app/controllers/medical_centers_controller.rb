@@ -1,5 +1,6 @@
 class MedicalCentersController < ApplicationController
   before_action :find_medical_center, only: [:show, :edit, :update, :destroy]
+  before_action :authorize!, except: [:index]
   
   def index
     @medical_centers = MedicalCenter.all
@@ -38,6 +39,10 @@ class MedicalCentersController < ApplicationController
   end
 
   private
+
+  def authorize!
+    authorize(@medical_center || MedicalCenter)
+  end
 
   def find_medical_center
     @medical_center = MedicalCenter.find(params[:id])

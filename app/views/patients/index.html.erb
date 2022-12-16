@@ -9,9 +9,10 @@
 </ul>
 
 <hr>
-
-<%= link_to "Add Patient", new_medical_center_patient_path(@medical_center) %>
-
-<hr>
+<% if current_user.class.to_s == 'Admin' %>
+  <ul>
+    <li><%= link_to "Add Patient", new_medical_center_patient_path(@medical_center) %></li>
+  </ul><hr>
+<% end %>
 
 <%= link_to "Medical Center #{@medical_center.legal_entity}", medical_center_path(@medical_center) %>

@@ -10,7 +10,12 @@ class PatientsController < ApplicationController
 
   def create
     @patient = @medical_center.patients.create(patient_params)
-    redirect_to medical_center_patient_path(@medical_center, @patient)
+
+    if @patient.save
+      redirect_to medical_center_patient_path(@medical_center, @patient)
+    else
+      render :new
+    end
   end
 
   def edit; end

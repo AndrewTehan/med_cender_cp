@@ -2,12 +2,12 @@
 
 <ul>
   <% @medical_centers.each do |medical_center| %>
-    <li>
-      <%= link_to medical_center.legal_entity, medical_center %>
-    </li>
+      <% if current_user.class.to_s == 'Admin' %>
+        <li><%= link_to medical_center.legal_entity, medical_center %></li>
+      <% elsif current_user.department.medical_center == medical_center %>
+        <li><%= link_to medical_center.legal_entity, medical_center %></li>
+      <% end %>
   <% end %>
 </ul>
 
-<hr>
-
-<%= link_to "New Medical Center", new_medical_center_path %>
+<hr><%= link_to "New Medical Center", new_medical_center_path %>

@@ -2,21 +2,17 @@
 
 <p><%= @visit.patient.full_name %></p>
 
-<ul>
-  <li><%= link_to "Edit", edit_medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit) %></li>
-  <li><%= link_to "Destroy", medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-</ul>
-
-<hr>
+<% if current_user.class.to_s == 'Admin' %>
+ <ul>
+    <li><%= link_to "Edit", edit_medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit) %></li>
+    <li><%= link_to "Destroy", medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></li>
+  </ul><hr>
+<% end %>
 
 <%= link_to "Create Inspection Report", new_medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit) %>
 
-<hr>
+<hr><%= link_to "Inspection Report Index", medical_center_department_doctor_visit_inspection_reports_path(@medical_center, @department, @doctor, @visit) %>
 
-<%= link_to "Inspection Report Index", medical_center_department_doctor_visit_inspection_reports_path(@medical_center, @department, @doctor, @visit) %>
-
-<hr>
-
-<%= link_to "Visit Index #{@doctor.full_name}", medical_center_department_doctor_visits_path(@medical_center, @department, @doctor) %>
+<hr><%= link_to "Visit Index #{@doctor.full_name}", medical_center_department_doctor_visits_path(@medical_center, @department, @doctor) %>

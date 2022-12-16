@@ -3,23 +3,40 @@ class VisitsController < ApplicationController
   before_action :find_department, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :find_doctor, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :find_visit, only: [:show, :edit, :update, :destroy]
+  before_action :authorize!
 
   def index
+    redirect_to root_path unless @vp.index?
     @visits = @doctor.visits
   end
 
-  def new; end
-
-  def create
-    @visit = @doctor.visits.create(visit_params)
-    redirect_to medical_center_department_doctor_visits_path(@medical_center, @department, @doctor)
+  def new
+    redirect_to root_path unless @vp.index?
   end
 
-  def show; end
+  def create
+    redirect_to root_path unless @vp.index?
+    @visit = @doctor.visits.new(visit_params)
+    
+    if @visit.save
+      redirect_to medical_center_department_doctor_visits_path(@medical_center, @department, @doctor)
+    else
+      redirect_to :new
+    end
 
-  def edit; end
+  end
+
+  def show
+    redirect_to root_path unless @vp.index?
+  end
+
+  def edit
+    redirect_to root_path unless @vp.index?
+  end
 
   def update
+    redirect_to root_path unless @vp.index?
+
     if @visit.update(visit_params)
       redirect_to medical_center_department_doctor_visit_path(@medical_center, @department, @doctor, @visit)
     else
@@ -28,11 +45,16 @@ class VisitsController < ApplicationController
   end
 
   def destroy
+    redirect_to root_path unless @vp.index?
     @visit.destroy
     redirect_to medical_center_department_doctor_visits_path(@medical_center, @department, @doctor)
   end
 
   private
+
+  def authorize!
+    @vp = VisitPolicy.new(current_user, @visit || Visit, @doctor)
+  end
 
   def find_medical_center
     @medical_center = MedicalCenter.find(params[:medical_center_id])
