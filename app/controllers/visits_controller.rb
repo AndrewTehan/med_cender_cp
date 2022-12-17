@@ -1,4 +1,4 @@
-class VisitsController < ApplicationController 
+class VisitsController < ApplicationController
   before_action :find_medical_center, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :find_department, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :find_doctor, only: [:index, :new, :create, :show, :edit, :update, :destroy]
@@ -17,8 +17,12 @@ class VisitsController < ApplicationController
   def create
     redirect_to root_path unless @vp.index?
     @visit = @doctor.visits.new(visit_params)
-    
+
     if @visit.save
+      VisitNotificationsMailer.with(doctor: @visit.doctor, patient: @visit.patient, visit: @visit).new_visit.deliver_later
+      VisitNotifications::ReminderJob.perform_at(@visit.datetime - 1.day, @visit.id)
+      VisitNotifications::ReminderJob.perform_at(@visit.datetime - 30.minutes, @visit.id)
+
       redirect_to medical_center_department_doctor_visits_path(@medical_center, @department, @doctor)
     else
       redirect_to :new
