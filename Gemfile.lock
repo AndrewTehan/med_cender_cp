@@ -94,6 +94,8 @@ GEM
     minitest (5.16.3)
     msgpack (1.6.0)
     nio4r (2.5.8)
+    nokogiri (1.13.8-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -190,6 +192,7 @@ GEM
     zeitwerk (2.6.1)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -209,7 +212,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
-  webpacker (~> 4.0)
+  webpacker
 
 RUBY VERSION
    ruby 3.0.2p107
