@@ -1,4 +1,4 @@
-Admin.create(full_name: 'admin1', email: 'admin@gmail.com', phone_number: "+375447756860", password: 123321)
+Admin.create(full_name: 'admin1', email: 'admin1@gmail.com', phone_number: "+375447756860", password: 123321)
 
 medical_center_a = MedicalCenter.create(email: "mca@gmail.com", address: "Minsk", schedule: "full time", legal_entity: "OOO MCA")
 medical_center_b = MedicalCenter.create(email: "studMC@gmail.com", address: "Minsk", schedule: "full time", legal_entity: "OOO StudMC")
