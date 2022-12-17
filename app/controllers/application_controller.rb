@@ -15,10 +15,21 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Pundit::NotAuthorizedError, with: :flash_message
+  rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
+
+  # protect_from_forgery with::exception
+  
+  def not_found_method
+    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
+  end
 
   private
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:full_name, :phone_number, :email, :password) }
+  end
+
+  def handle_record_not_found
+    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
   end
 end
