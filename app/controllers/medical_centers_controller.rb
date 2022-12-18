@@ -4,19 +4,21 @@ class MedicalCentersController < ApplicationController
   
   def index
     @medical_centers = MedicalCenter.all
+    render json: @medical_centers
   end
 
   def new
     @medical_center = MedicalCenter.new
+    binding.pry
   end
 
   def create
     @medical_center = MedicalCenter.new(medical_center_params)
-
+    binding.pry
     if @medical_center.save
-      redirect_to @medical_center
+      render json: @medical_center
     else
-      render :new
+      render json: @medical_center.errors
     end
   end
 

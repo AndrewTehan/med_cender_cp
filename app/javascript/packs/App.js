@@ -2,81 +2,103 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Container } from 'reactstrap';
 import NavBar from './components/NavBar';
-import AddMedicalCenters from './components/AddAppointments';
-import SearchAppointments from './components/SearchAppointments';
-import ListMedicalCenters from './components/ListAppointments';
+// import AddAppointments from './components/AddAppointments';
+// import SearchAppointments from './components/SearchAppointments';
+// import ListAppointments from './components/ListAppointments';
+import ListMedicalCenters from './components/ListMedicalCenters';
+import AddMedicalCenters from './components/AddMedicalCenters';
 import Footer from './components/Footer';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointments: [],
-      showAddBody: false,
-      orderBy: 'patientName',
-      orderDir: 'asc',
-      searchText: '',
+      medicalCenters: [],
+      // appointments: [],
+      // showAddBody: false,
+      // orderBy: 'patientName',
+      // orderDir: 'asc',
+      // searchText: '',
     };
   }
 
   componentDidMount() {
-    fetch('./data.json')
+    // fetch('./data.json')
+    //   .then(res => res.json())
+    //   .then(data => this.setState({
+    //     appointments: data
+    //   }))
+    //   .catch(error => console.log('There has been a problem with fetching appointments.'))
+
+      fetch('http://localhost:3000/medical_centers')
       .then(res => res.json())
       .then(data => this.setState({
-        appointments: data
+        medicalCenters: data
       }))
-      .catch(error => console.log('There has been a problem with fetching appointments.'))
+      .catch(error => console.log('There has been a problem with fetching medical centers.'))
   }
 
-  saveAppointment = (newAppointment) => {
-    let apts = this.state.appointments;
-    apts.push(newAppointment);
-    this.setState({
-      appointments: apts
-    });
-  }
-  deleteAppointment = (aptId) => {
-    let apts = this.state.appointments;
-    let aptToDelete = _.find(apts, _.matchesProperty('id', parseInt(aptId, 10)));
-    const newApts = _.without(apts, aptToDelete)
-    this.setState({
-      appointments: newApts
-    });
-  }
+  // saveAppointment = (newAppointment) => {
+  //   let apts = this.state.appointments;
+  //   apts.push(newAppointment);
+  //   this.setState({
+  //     appointments: apts
+  //   });
+  // }
 
-  sort = (orderBy, orderDir) => {
+  saveMedicalCenter = (newMedicalCenter) => {
+    let medcenters = this.state.medicalCenters;
+    medcenters.push(newMedicalCenter);
     this.setState({
-      orderBy: orderBy,
-      orderDir: orderDir
+      appointments: medcenters
     });
   }
+  // deleteAppointment = (aptId) => {
+  //   let apts = this.state.appointments;
+  //   let aptToDelete = _.find(apts, _.matchesProperty('id', parseInt(aptId, 10)));
+  //   const newApts = _.without(apts, aptToDelete)
+  //   this.setState({
+  //     appointments: newApts
+  //   });
+  // }
 
-  search = (query) => {
-    this.setState({
-      searchText: query
-    });
-  }
+  // sort = (orderBy, orderDir) => {
+  //   this.setState({
+  //     orderBy: orderBy,
+  //     orderDir: orderDir
+  //   });
+  // }
+
+  // search = (query) => {
+  //   this.setState({
+  //     searchText: query
+  //   });
+  // }
 
   render() {
     let filteredApts = [];
-    let { orderBy, orderDir, searchText, appointments } = this.state;
+    let { orderBy, orderDir, searchText, appointments, medicalCenters } = this.state;
 
-    appointments.forEach((item) => {
-      if (item.patientName.toLowerCase().indexOf(searchText) !== -1) {
-        filteredApts.push(item);
-      }
-    });
+    // appointments.forEach((item) => {
+    //   if (item.patientName.toLowerCase().indexOf(searchText) !== -1) {
+    //     filteredApts.push(item);
+    //   }
+    // });
 
-    filteredApts = _.orderBy(filteredApts, orderBy, orderDir);
+    // filteredApts = _.orderBy(filteredApts, orderBy, orderDir);
 
 
     return (
       <>
         <NavBar />
-        <Container>
-          <AddMedicalCenters saveApt={this.saveAppointment} />
+        {/* <Container>
+          <AddAppointments saveApt={this.saveAppointment} />
           <SearchAppointments sort={this.sort} search={this.search} orderBy={this.state.orderBy} orderDir={this.state.orderDir} />
-          <ListMedicalCenters appointments={filteredApts} onDelete={this.deleteAppointment} />
+          <ListAppointments appointments={filteredApts} onDelete={this.deleteAppointment} />
+        </Container> */}
+        <Container>
+          <ListMedicalCenters medicalCenters={medicalCenters} />
+          <AddMedicalCenters saveMedCentr={this.saveAppointment} />
         </Container>
         <Footer />
       </>
