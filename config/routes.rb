@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :patients
   end
   
+  post '/search', to: 'search#search'
+
   match '*unmatched', to: 'application#not_found_method', via: :all
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
