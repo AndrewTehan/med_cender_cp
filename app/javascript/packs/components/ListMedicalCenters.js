@@ -13,8 +13,12 @@ const ListMedicalCenters = ({ medicalCenters, onDelete }) => {
             <Media>
               <Media body>
                 <Media heading className="m-0">
-                  {item.legalEntity}
+                  {item.legal_entity}
                 </Media>
+                <p><span className="font-weight-bold">Name:</span> {item.legal_entity}</p>
+                <p><span className="font-weight-bold">Addess:</span> {item.address}</p>
+                <p><span className="font-weight-bold">Email:</span> {item.email}</p>
+                <p><span className="font-weight-bold">Schedule:</span> {item.schedule}</p>
               </Media>
             </Media>
           </li>

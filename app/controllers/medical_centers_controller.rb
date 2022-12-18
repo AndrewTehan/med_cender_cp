@@ -1,7 +1,7 @@
 class MedicalCentersController < ApplicationController
   before_action :find_medical_center, only: [:show, :edit, :update, :destroy]
   before_action :authorize!, except: [:index]
-  
+
   def index
     @medical_centers = MedicalCenter.all
     render json: @medical_centers
@@ -9,12 +9,10 @@ class MedicalCentersController < ApplicationController
 
   def new
     @medical_center = MedicalCenter.new
-    binding.pry
   end
 
   def create
     @medical_center = MedicalCenter.new(medical_center_params)
-    binding.pry
     if @medical_center.save
       render json: @medical_center
     else

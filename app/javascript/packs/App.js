@@ -30,12 +30,23 @@ export default class App extends Component {
     //   }))
     //   .catch(error => console.log('There has been a problem with fetching appointments.'))
 
-      fetch('http://localhost:3000/medical_centers')
-      .then(res => res.json())
+    this.loadMedicalCentres();
+  }
+
+
+  loadMedicalCentres = () => {
+    const url = "/medical_centers";
+    fetch(url)
+      .then((data) => {
+        if (data.ok) {
+          return data.json();
+        }
+        throw new Error("Network error.");
+      })
       .then(data => this.setState({
         medicalCenters: data
       }))
-      .catch(error => console.log('There has been a problem with fetching medical centers.'))
+      .catch((err) => message.error("Error: " + err));
   }
 
   // saveAppointment = (newAppointment) => {
@@ -87,7 +98,6 @@ export default class App extends Component {
 
     // filteredApts = _.orderBy(filteredApts, orderBy, orderDir);
 
-
     return (
       <>
         <NavBar />
@@ -97,7 +107,7 @@ export default class App extends Component {
           <ListAppointments appointments={filteredApts} onDelete={this.deleteAppointment} />
         </Container> */}
         <Container>
-          <ListMedicalCenters medicalCenters={medicalCenters} />
+          <ListMedicalCenters medicalCenters={medicalCenters} onDelete={this.deleteAppointment} />
           <AddMedicalCenters saveMedCentr={this.saveAppointment} />
         </Container>
         <Footer />
