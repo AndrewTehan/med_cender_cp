@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <%= form_with url: search_path, local: false, model: @text do |form| %>
+      <div>         
+        <%= form.text_field :text, id: 'text', required: true %>
+        <%= form.label 'Search', for: 'text' %>
+        <%= form.submit 'Searh', id: 'search_button', hidden: true %>
+      </div>
+    <% end %>
+    
+    <div id='results' style='position: relative; z-index: 2;'></div> 
+
     <% if current_user.class.to_s == 'Admin' %>
       <li><%= link_to "sign_out (#{current_user.class})", destroy_admin_session_path, method: :delete %></li>
     <% elsif current_user.class.to_s == 'Doctor' %>
@@ -20,3 +30,10 @@
     <%= yield %>
   </body>
 </html>
+
+<script>
+  $('#text').on('input', () =>
+  {
+    $('#search_button').click()
+  })
+</script>

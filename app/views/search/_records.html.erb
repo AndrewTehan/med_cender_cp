@@ -1,0 +1,7 @@
+<div>
+  <% @search_list.each do |record| %>  
+    <% if record.class.name.equal? Patient.name %>
+      <p> <%= link_to record.full_name, root_path %> </p>
+    <% end %>
+  <% end %>
+</div>
