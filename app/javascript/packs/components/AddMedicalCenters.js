@@ -10,7 +10,7 @@ class AddMedicalCenters extends React.Component {
     super(props);
     this.state = {
       showBody: false,
-      legalEntity: "",
+      legal_entity: "",
       email: "",
       address: "",
       schedule: "",
@@ -24,17 +24,18 @@ class AddMedicalCenters extends React.Component {
   }
   save = (e) => {
     e.preventDefault();
-    const { legalEntity, email, address, schedule } = this.state;
-    if (legalEntity !== "" && email !== "" && address !== "" && schedule !== "") {
+    const { legal_entity, email, address, schedule } = this.state;
+    if (legal_entity !== "" && email !== "" && address !== "" && schedule !== "") {
       let medCentr = {
         id: Date.now(),
-        legalEntity: this.state.legalEntity,
+        legal_entity: this.state.legal_entity,
         email: this.state.email,
         address: this.state.address,
         schedule: this.state.schedule
       };
+      let value = { medical_center: medCentr };
       let clear = {
-        legalEntity: "",
+        legal_entity: "",
         email: "",
         address: "",
         schedule: "",
@@ -44,24 +45,24 @@ class AddMedicalCenters extends React.Component {
         showBody: false,
         ...clear
       });
-      const url = "http://localhost:3000/medical_centers";
+      debugger
+      const url = "/medical_centers";
       fetch(url, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(value),
       })
         .then((data) => {
           if (data.ok) {
-            this.handleCancel();
-
             return data.json();
           }
           throw new Error("Network error.");
         })
         .then(() => {
-          this.props.reloadBeers();
+          // TODO: reloadMedicalCenters
+          this.props.loadMedicalCentres();
         })
         .catch((err) => console.error("Error: " + err));
     } else {
@@ -83,6 +84,7 @@ class AddMedicalCenters extends React.Component {
     let errors = {
       display: this.state.formErrors ? 'block' : 'none'
     };
+
     return (
       <Card className="mt-4 mb-4 card-border" outline color="primary">
         <CardHeader style={styles} onClick={this.toggleBody}><i className="fas fa-plus"></i> Add New Medical Center</CardHeader>
@@ -92,8 +94,8 @@ class AddMedicalCenters extends React.Component {
           </FormText>
           <Form onSubmit={this.save}>
             <FormGroup>
-              <Label for="legalEntity">Legal Entity</Label>
-              <Input type="text" id="legalEntity" placeholder="Legal Entity" value={this.state.legalEntity} onChange={this.handleChange} />
+              <Label for="legal_entity">Legal Entity</Label>
+              <Input type="text" id="legal_entity" placeholder="Legal Entity" value={this.state.legal_entity} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup>
               <Label for="email">email</Label>
