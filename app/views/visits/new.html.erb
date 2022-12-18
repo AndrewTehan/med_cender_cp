@@ -2,7 +2,7 @@
 <%= form_with model: [@medical_center, @department, @doctor, @doctor.visits.build ], local: true do |form| %>
   <p>
     <%= form.label :datetime %><br>
-    <%= form.text_field :datetime %>
+    <%= form.datetime_field :datetime %>
   </p>
 
   <p>
