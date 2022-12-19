@@ -1,9 +1,10 @@
 class MedicalCentersController < ApplicationController
   before_action :find_medical_center, only: [:show, :edit, :update, :destroy]
   before_action :authorize!, except: [:index]
-  
+
   def index
     @medical_centers = MedicalCenter.all
+    render json: @medical_centers
   end
 
   def new
@@ -12,11 +13,10 @@ class MedicalCentersController < ApplicationController
 
   def create
     @medical_center = MedicalCenter.new(medical_center_params)
-
     if @medical_center.save
-      redirect_to @medical_center
+      render json: @medical_center
     else
-      render :new
+      render json: @medical_center.errors
     end
   end
 
@@ -34,8 +34,8 @@ class MedicalCentersController < ApplicationController
 
   def destroy
     @medical_center.destroy
-
-    redirect_to root_path
+    render json: { notice: 'medical center was successfully removed.' }
+    # redirect_to root_path
   end
 
   private

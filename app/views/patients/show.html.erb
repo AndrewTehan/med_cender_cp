@@ -10,6 +10,25 @@
     <li><%= link_to "Destroy", medical_center_patient_path(@medical_center, @patient),
                     method: :delete,
                     data: { confirm: "Are you sure?" } %></li>
-  </ul>
+  </ul><hr>
 <% end %>
-<hr><%= link_to "Patient Index", medical_center_patients_path(@medical_center) %>
+
+<% if @patient.inspection_reports.exists? %>
+  Patient Medical Card
+  <ul>
+    <% @patient.inspection_reports.each do |ir| %>
+      <li>
+        <div>
+          <p><%= "Medical Report: #{ir.medical_report}" %></p>
+          <p><%= "Medical Appointment: #{ir.medical_appointment}" %></p>
+          <p><%= "Visit Doctor: #{Doctor.find(ir.visit.doctor_id).full_name}" %></p>
+          <p><%= "Visit Date and Time: #{ir.visit.datetime}" %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h1> Patient's medical record are empty yet!</h1>
+<% end %>
+
+<%= link_to "Patient Index", medical_center_patients_path(@medical_center) %>

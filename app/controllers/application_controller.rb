@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  skip_before_action :verify_authenticity_token
+
   def user_not_authorized
     redirect_to(root_path)
   end
@@ -18,7 +20,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
 
   # protect_from_forgery with::exception
-  
+
   def not_found_method
     render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
   end
