@@ -34,8 +34,8 @@ class MedicalCentersController < ApplicationController
 
   def destroy
     @medical_center.destroy
-
-    redirect_to root_path
+    render json: { notice: 'medical center was successfully removed.' }
+    # redirect_to root_path
   end
 
   private

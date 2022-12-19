@@ -1,10 +1,15 @@
 import React from 'react'
 import { Media, Button } from 'reactstrap'
 
-const ListMedicalCenters = ({ medicalCenters, onDelete }) => {
+const ListMedicalCenters = ({ medicalCenters, onClick, onDelete }) => {
+  const handleGet = (event) => {
+    onClick(event.target.id);
+  }
+
   const handleDelete = (event) => {
     onDelete(event.target.id);
   }
+
   return (
     <ul>
       {medicalCenters.map((item) => {
@@ -14,6 +19,12 @@ const ListMedicalCenters = ({ medicalCenters, onDelete }) => {
               <Media body>
                 <Media heading className="m-0">
                   {item.legal_entity}
+                </Media>
+                <Media right top>
+                  <Button color="success" className="mr-3 delete-btn">GO<i id={item.id} onClick={handleGet} className="fas fa-times"></i></Button>
+                </Media>
+                <Media right top>
+                  <Button color="warning" className="mr-3 delete-btn">Delete<i id={item.id} onClick={handleDelete} className="fas fa-times"></i></Button>
                 </Media>
                 <p><span className="font-weight-bold">Name:</span> {item.legal_entity}</p>
                 <p><span className="font-weight-bold">Addess:</span> {item.address}</p>

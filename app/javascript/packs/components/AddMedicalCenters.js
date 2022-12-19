@@ -45,7 +45,6 @@ class AddMedicalCenters extends React.Component {
         showBody: false,
         ...clear
       });
-      debugger
       const url = "/medical_centers";
       fetch(url, {
         method: "post",
@@ -61,7 +60,6 @@ class AddMedicalCenters extends React.Component {
           throw new Error("Network error.");
         })
         .then(() => {
-          // TODO: reloadMedicalCenters
           this.props.loadMedicalCentres();
         })
         .catch((err) => console.error("Error: " + err));

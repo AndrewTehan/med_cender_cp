@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <header>
       <Navbar color="danger">
-        <NavbarBrand className="text-white"><img src={logo} height="48" className="d-inline-block align-center" alt="logo" /> Doctor Appointments</NavbarBrand>
+        <NavbarBrand className="text-white"><img src={logo} height="48" className="d-inline-block align-center" alt="logo" />Medical Center Application</NavbarBrand>
       </Navbar>
     </header>
   )
