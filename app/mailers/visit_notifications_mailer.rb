@@ -10,7 +10,7 @@ class VisitNotificationsMailer < ApplicationMailer
     patient = params[:patient]
     visit = params[:visit]
 
-    @message = "Hi, #{doctor.full_name}! A new visit created at #{visit.datetime}. Patient: #{patient.full_name}"
+    @message = "Hi, Dr.#{doctor.full_name}! A new visit created at #{visit.datetime}. Patient: #{patient.full_name}"
 
     mail to: doctor.email
   end
@@ -25,7 +25,7 @@ class VisitNotificationsMailer < ApplicationMailer
     patient = params[:patient]
     visit = params[:visit]
 
-    @message = "Hi, #{doctor.full_name}! Kind reminder about upcoming visit at #{visit.datetime}. Patient: #{patient.full_name}"
+    @message = "Hi, Dr.#{doctor.full_name}! Kind reminder about upcoming visit at #{visit.datetime}. Patient: #{patient.full_name}"
 
     mail to: doctor.email
   end

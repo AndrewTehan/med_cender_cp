@@ -1,9 +1,9 @@
 <h1>Edit Visit</h1>
 
-<%= form_with model: [@medical_center, @department, @doctor, @visit], local: true do |form| %>
+<%= form_with model: [@medical_center, @department, @doctor, @visit, @inspection_report], local: true do |form| %>
   <p>
-    <%= form.label :datetime %><br>
-    <%= form.text_field :datetime, value: @visit.datetime %>
+    <%= form.label :medical_report %><br>
+    <%= form.text_field :medical_report, value: @inspection_report.medical_report %>
   </p>
   <p>
     <%= form.submit %>
