@@ -13,7 +13,11 @@ class InspectionReportsController < ApplicationController
 
   def create
     @inspection_report = @visit.inspection_reports.create(inspection_report_params)
-    redirect_to medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit, @inspection_report)
+    report_path = medical_center_department_doctor_visit_inspection_report_url(@medical_center, @department, @doctor, @visit, @inspection_report)
+
+    ReportNotificationsMailer.with(doctor: @doctor, patient: @visit.patient, report_path: report_path, visit: @visit).report_created.deliver_later
+
+    redirect_to report_path
   end
 
   def show; end
@@ -22,7 +26,11 @@ class InspectionReportsController < ApplicationController
 
   def update
     if @inspection_report.update(inspection_report_params)
-      redirect_to medical_center_department_doctor_visit_inspection_report_path(@medical_center, @department, @doctor, @visit, @inspection_report)
+      report_path = medical_center_department_doctor_visit_inspection_report_url(@medical_center, @department, @doctor, @visit, @inspection_report)
+
+      ReportNotificationsMailer.with(doctor: @doctor, patient: @visit.patient, report_path: report_path, visit: @visit).report_updated.deliver_later
+
+      redirect_to report_path
     else
       render :edit
     end
