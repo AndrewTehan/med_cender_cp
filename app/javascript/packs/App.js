@@ -108,7 +108,7 @@ export default class App extends Component {
         </Container> */}
         <Container>
           <ListMedicalCenters medicalCenters={medicalCenters} onDelete={this.deleteAppointment} />
-          <AddMedicalCenters saveMedCentr={this.saveAppointment} />
+          <AddMedicalCenters saveMedCentr={this.saveAppointment} loadMedicalCentres={this.loadMedicalCentres}/>
         </Container>
         <Footer />
       </>

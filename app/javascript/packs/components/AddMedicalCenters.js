@@ -56,15 +56,13 @@ class AddMedicalCenters extends React.Component {
       })
         .then((data) => {
           if (data.ok) {
-            this.handleCancel();
-
             return data.json();
           }
           throw new Error("Network error.");
         })
         .then(() => {
           // TODO: reloadMedicalCenters
-          this.props.reloadBeers();
+          this.props.loadMedicalCentres();
         })
         .catch((err) => console.error("Error: " + err));
     } else {
